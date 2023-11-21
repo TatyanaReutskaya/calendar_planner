@@ -1,0 +1,19 @@
+#Data source
+spring.datasource.driverClassName=
+spring.datasource.url=
+spring.datasource.username=
+spring.datasource.password=
+
+#Hibernate properties
+spring.jpa.properties.hibernate.dialect=
+
+#hibernate.hbm2ddl.auto=create
+spring.jpa.properties.hibernate.hbm2ddl.auto=update
+
+#Mail properties
+spring.mail.host=
+spring.mail.port=
+spring.mail.username=
+spring.mail.password=
+spring.mail.properties.mail.smtp.auth=
+spring.mail.properties.mail.smtp.starttls.enable=

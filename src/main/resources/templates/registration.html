@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="stylesheet" href="/style/formLogin.css">
+</head>
+<body>
+<div th:insert="~{headerUnauthorized :: header}"></div>
+<div class="main">
+<form method="POST" th:action="@{/registration}" th:object="${person}" class="formLogin" id="registrationForm">
+    <div class="input-wrapper">
+        <span>Ваше имя:</span>
+        <input type="text" th:field="*{username}" id="username" class="input" placeholder="Ваше имя"/>
+        <div style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username name error</div>
+    </div>
+    <div class="input-wrapper">
+        <span>Email:</span>
+        <input type="email" th:field="*{email}"id="email" class="input" placeholder="Email"/> <br/>
+        <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>
+    </div>
+
+    <div class="input-wrapper">
+        <span>Дата рождения:</span>
+        <input type="date" th:field="*{dateOfBirth}"id="dateOfBirth" class="input_date"/> <br/>
+        <div style="color:red" th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}">Date of Birth error</div>
+    </div>
+
+    <div class="input-wrapper">
+        <span>Пароль</span>
+        <input type="password" th:field="*{password}" id="password" class="input" placeholder="Пароль"/>
+        <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password name error</div>
+    </div>
+    <div class="input-wrapper">
+        <input type="submit" value="Зарегистрироваться" class="submit_login" id="registerBtn"/>
+    </div>
+</form>
+</div>
+<script>
+  document.getElementById("registrationForm").addEventListener("submit", function(event) {
+    setTimeout(function() {
+        document.getElementById("registerBtn").disabled = true;
+    }, 0);
+});
+</script>
+</body>
+</html>

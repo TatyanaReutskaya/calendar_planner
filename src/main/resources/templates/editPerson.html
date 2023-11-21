@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+  <link rel="stylesheet" href="style/style.css">
+  <link rel="stylesheet" href="style/left_right_btn.css">
+  <link rel="stylesheet" href="style/menu.css">
+  <link rel="stylesheet" href="style/settings.css">
+    <title>Edit</title>
+</head>
+<body>
+<div th:insert="~{headerAuthorized :: header}"></div>
+<div class="main">
+<form th:method="POST" th:action="@{/edit}" th:object="${person}" class="info" id="editForm">
+  <div class="info-wrapper">
+    <span class="info_span">Имя: </span>
+    <input type="text" th:field="*{username}" class="about_span"/>
+  </div>
+  <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="error_text" >Error name</span>
+  <!--<span th:if="${usernameError!=null}" th:text="${usernameError}" class="error_text" >Error name</span>-->
+  <div class="info-wrapper">
+    <span class="info_span">Email: </span>
+    <input type="text" th:field="*{email}" class="about_span"/>
+  </div>
+  <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error_text" >Error email</span>
+  <div class="info-wrapper">
+    <span class="info_span">Дата рождения: </span>
+    <input type="date" th:field="*{dateOfBirth}" class="about_span"/>
+  </div>
+  <span th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}" class="error_text" >Error date</span>
+  <div class="info-wrapper">
+    <input type="submit" value="Сохранить изменения" class="edit_btn" id="editBtn"/>
+  </div>
+</form>
+</div>
+<script>
+  document.getElementById("editForm").addEventListener("submit", function(event) {
+    setTimeout(function() {
+        document.getElementById("editBtn").disabled = true;
+    }, 0);
+});
+</script>
+</body>
+</html>

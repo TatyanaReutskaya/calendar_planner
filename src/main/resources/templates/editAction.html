@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/style/style.css}">
+    <link rel="stylesheet" th:href="@{/style/formLogin.css}">
+    <link rel="stylesheet" th:href="@{/style/menu.css}">
+    <title th:text="${action.name}">Title</title>
+</head>
+<body>
+<div th:insert="~{headerAuthorized :: header}"></div>
+<div class="main">
+    <form method="POST" th:action="@{/days/edit/{id}(id=${action.id})}" th:object="${action}" class="formLogin" id="actionForm">
+        <div class="input-wrapper">
+            <span>Название:</span>
+            <input type="text" th:field="*{name}" class="input" placeholder="Название"/>
+            <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
+        </div>
+        <div class="input-wrapper">
+            <span>Время:</span>
+            <input type="datetime-local" name="time" class="input" th:field="*{date}"/> <br/>
+            <div style="color:red" th:if="${#fields.hasErrors('date')}" th:errors="*{date}">Date error</div>
+        </div>
+        <div class="input-wrapper">
+            <span>Комментарий:</span>
+            <input type="text" th:field="*{comment}" class="input" placeholder="Комментарий"/> <br/>
+            <div style="color:red" th:if="${#fields.hasErrors('comment')}" th:errors="*{comment}">Comment error</div>
+        </div>
+        <div th:with="repeatCheck=${repeat!=365&&repeat!=363&&repeat!=182&&repeat!=183&&repeat!=30&&repeat!=31&&repeat!=28&&repeat!=7&&repeat!=null}" class="input-wrapper">
+            <span>Повтор:</span>
+            <select id="repeat" th:value="${repeat}" class="input select" onchange="handleRepeatSelect()">
+                <option value=""th:selected="${(repeat==null)||(repeat==0)}">Не повторять</option>
+                <option value="365" th:selected="${(repeat==365)||(repeat==366)}">Каждые год</option>
+                <option value="182" th:selected="${(repeat==182)||(repeat==183)}">Каждые пол года</option>
+                <option value="30" th:selected="${(repeat==30)||(repeat==31)||(repeat==28)}">Каждый месяц</option>
+                <option value="7" th:selected="${repeat==7}">Каждую неделю</option>
+                <option value="-1" th:selected="${repeatCheck}">Другое</option>
+            </select>
+
+            <label for="otherRepeatInput"
+                   th:style="'display:'+${repeatCheck ? 'inline-block; color:gray;' : 'none;'}"
+                    id="otherRepeatLabel">Укажите, через сколько дней повторять событие:</label>
+            <input type="number" id="otherRepeatInput" name="repeat"
+                   th:style="'display:'+${repeatCheck ? 'inline-block;' : 'none;'}" th:value="${repeat}"
+                   class="input"
+                   placeholder="Укажите, через сколько дней повторять событие"
+                   onchange="handleOtherRepeatInput()"/>
+            <div style="color:red" th:if="${#fields.hasErrors('repeat')}" th:errors="*{repeat}">Repeat error</div>
+        </div>
+        <div class="input-wrapper">
+            <input type="submit" name="saveOne" value="Измененить только это событие" class="submit_login" />
+        </div>
+        <div th:if="${repeat!=null}" class="input-wrapper">
+            <input type="submit" name="saveAll" value="Изменить все повторяющиеся события"  class="submit_login" />
+        </div>
+    </form>
+</div>
+<script>
+    function handleRepeatSelect() {
+    var selectElement = document.getElementById("repeat");
+    var otherRepeatLabel = document.getElementById("otherRepeatLabel");
+    var otherRepeatInput = document.getElementById("otherRepeatInput");
+
+    if (selectElement.value === "-1") {
+        otherRepeatLabel.style.display = "inline-block";
+        otherRepeatInput.style.display = "inline-block";
+    } else {
+        otherRepeatLabel.style.display = "none";
+        otherRepeatInput.style.display = "none";
+    }
+    if(selectElement.value != "-1") {
+        otherRepeatInput.value=selectElement.value;
+    }
+}
+    function handleOtherRepeatInput() {
+        var selectElement = document.getElementById("repeat");
+        var otherRepeatInput = document.getElementById("otherRepeatInput");
+
+        if (select.value === "-1") {
+            select.value = otherRepeatInput.value;
+        }
+    }
+</script>
+
+<script>
+    document.getElementById("actionForm").addEventListener("submit", function(event) {
+    setTimeout(function() {
+        document.getElementsByName("saveOne")[0].disabled = true;
+        document.getElementsByName("saveAll")[0].disabled = true;
+    }, 0);
+});
+</script>
+</body>
+</html>

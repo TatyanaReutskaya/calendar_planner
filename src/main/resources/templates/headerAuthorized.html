@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Header Authorized</title>
+</head>
+<body>
+<header>
+    <a th:href="@{/main}" class="logo"><h1>Your calendar</h1></a>
+    <div class="dropdown">
+
+        <button class="dropbtn" th:text="${authUsername}">User</button>
+        <div class="dropdown-content">
+            <a class="content" th:href="@{/settings}">Настройки</a>
+            <a class="content" href="#">Ссылка 2</a>
+            <a class="content" href="#">Ссылка 3</a>
+            <form  th:method="POST" th:action="@{/logout}">
+                <input type="submit" value="Выход" class="content"/>
+            </form>
+        </div>
+    </div>
+
+</header>
+</body>
+</html>

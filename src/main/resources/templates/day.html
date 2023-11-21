@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/style/style.css}">
+    <link rel="stylesheet" th:href="@{/style/left_right_btn.css}">
+    <link rel="stylesheet" th:href="@{/style/menu.css}">
+    <link rel="stylesheet" th:href="@{/style/settings.css}">
+    <title th:text="${calendar.getFoolDate}"></title>
+</head>
+<body>
+<div th:insert="~{headerAuthorized :: header}"></div>
+<div class="main">
+    <div class = "year_month_line">
+    <a th:href="@{/}"class="left_btn"> < </a>
+        <p class ="year_month" th:text="${calendar.getFoolDate}">FoolDate</p>
+    </div>
+    <div th:if="${actions.isEmpty()}">
+        <span>На этот день ничего не запланированно</span>
+    </div>
+    <div th:if="${!actions.isEmpty()}" th:each="action:${actions}" class="info-wrapper">
+        <a th:href="@{/days/infoAction/{id}(id=${action.id})}" th:text ="${action.name+' '+#temporals.format(action.date, 'HH:mm')}" class="edit_btn"></a>
+    </div>
+    <a th:href="@{/days/addAction}" class="edit_btn">Запланировать событие</a>
+</div>
+</body>
+</html>

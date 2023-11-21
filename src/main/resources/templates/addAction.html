@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/style/style.css}">
+    <link rel="stylesheet" th:href="@{/style/formLogin.css}">
+    <link rel="stylesheet" th:href="@{/style/menu.css}">
+    <title>Новое событие</title>
+</head>
+<body>
+<div th:insert="~{headerAuthorized :: header}"></div>
+<div class="main">
+    <form method="POST" th:action="@{/days/addAction}" th:object="${action}" class="formLogin" id="actionForm">
+        <div class="input-wrapper">
+            <span>Название:</span>
+            <input type="text" th:field="*{name}" class="input" placeholder="Название"/>
+            <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
+        </div>
+        <div class="input-wrapper">
+            <span>Время:</span>
+            <input type="time" name="time" class="input"/> <br/>
+            <div style="color:red" th:if="${timeError!=null}" th:text="${timeError}" class="error_text">timeError</div>
+        </div>
+
+        <div class="input-wrapper">
+            <span>Комментарий:</span>
+            <input type="text" th:field="*{comment}" class="input" placeholder="Комментарий"/> <br/>
+            <div style="color:red" th:if="${#fields.hasErrors('comment')}" th:errors="*{comment}">Comment error</div>
+        </div>
+        <div class="input-wrapper">
+            <span>Повтор:</span>
+            <select name="repeat" th:field="*{repeat}" class="input select" onchange="handleRepeatSelect()">
+                <option value="">Не повторять</option>
+                <option value="365">Каждые год</option>
+                <option value="182">Каждые пол года</option>
+                <option value="30">Каждый месяц</option>
+                <option value="7">Каждую неделю</option>
+                <option value="-1">Другое</option>
+            </select>
+
+            <label for="otherRepeatInput" style="color:gray;display: none" id="otherRepeatLabel">Укажите, через сколько дней повторять событие:</label>
+            <input type="number" id="otherRepeatInput" name="repeat" style="display: none;" th:field="*{repeat}"
+                   class="input"
+                   placeholder="Укажите, через сколько дней повторять событие"
+                   onchange="handleOtherRepeatInput()"/>
+            <div style="color:red" th:if="${#fields.hasErrors('repeat')}" th:errors="*{repeat}">Repeat error</div>
+
+        </div>
+        <div class="input-wrapper">
+            <input type="submit" value="Добавить событие" class="submit_login" id="registerBtn"/>
+        </div>
+    </form>
+</div>
+<script>
+    function handleRepeatSelect() {
+    var selectElement = document.getElementById("repeat");
+    var otherRepeatLabel = document.getElementById("otherRepeatLabel");
+    var otherRepeatInput = document.getElementById("otherRepeatInput");
+
+    if (selectElement.value === "-1") {
+        otherRepeatLabel.style.display = "inline-block";
+        otherRepeatInput.style.display = "inline-block";
+    } else {
+        otherRepeatLabel.style.display = "none";
+        otherRepeatInput.style.display = "none";
+    }
+}
+    function handleOtherRepeatInput() {
+        var select = document.getElementsByName("repeat")[0];
+        var otherRepeatInput = document.getElementById("otherRepeatInput");
+
+        if (select.value === "-1") {
+            select.value = otherRepeatInput.value;
+        }
+    }
+</script>
+<script>
+    document.getElementById("actionForm").addEventListener("submit", function(event) {
+        document.getElementById("registerBtn").disabled = true;
+    });
+</script>
+</body>
+</html>

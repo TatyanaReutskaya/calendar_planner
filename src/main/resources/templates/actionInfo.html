@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" th:href="@{/style/style.css}">
+  <link rel="stylesheet" th:href="@{/style/left_right_btn.css}">
+  <link rel="stylesheet" th:href="@{/style/menu.css}">
+  <link rel="stylesheet" th:href="@{/style/settings.css}">
+  <title th:text="${action.name}">Title</title>
+</head>
+<body>
+<div th:insert="~{headerAuthorized :: header}"></div>
+<div class="main">
+  <div class = "year_month_line">
+    <a th:href="@{/days/__${calendar.getDay()}__}"class="left_btn"> < </a>
+    <p class ="year_month" th:text="${calendar.getFoolDate}">FoolDate</p>
+  </div>
+  <div class="info">
+    <div class="info-wrapper">
+      <span class="info_span">Название: </span>
+      <span th:text="${action.name}" class="about_span"/>
+    </div>
+
+    <div class="info-wrapper">
+      <span class="info_span">Время: </span>
+      <span th:text="${#temporals.format(action.date, 'HH:mm')}" class="about_span"/>
+    </div>
+
+    <div class="info-wrapper" th:if="${!action.comment.isEmpty()}">
+      <span class="info_span">Комментарий: </span>
+      <span th:text="${action.comment}" class="about_span"/>
+    </div>
+    <div class="info-wrapper" >
+      <span class="info_span">Повтор: </span>
+      <span th:text="${repeatForModel}" class="about_span"/>
+    </div>
+
+    <form th:if="${!past}" th:method="POST" th:action="@{/days/infoAction/{id}(id=${action.id})}" class="info">
+      <div class="info-wrapper">
+        <input type="submit" value="Выполнено!" class="edit_btn"/>
+      </div>
+    </form>
+
+    <div class="info-wrapper">
+      <a th:href="@{/days/edit/{id}(id=${action.id})}" class="edit_btn">Редактировать</a>
+    </div>
+
+    <form th:method="POST" th:action="@{/days/deleteAction/{id}(id=${action.id})}" class="info">
+      <div class="info-wrapper">
+        <input type="submit" value="Удалить событие" class="edit_btn"/>
+      </div>
+    </form>
+</div>
+  </div>
+</body>
+</html>

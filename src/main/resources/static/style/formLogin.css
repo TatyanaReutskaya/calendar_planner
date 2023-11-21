@@ -1,0 +1,90 @@
+.input:focus::placeholder {
+	color: transparent;
+}
+.input::placeholder {
+	font-size: 16px;
+	font-family: "Times New Roman", serif;
+}
+.input-wrapper span {
+	display: block;
+	color: transparent;
+	transition: color 0.5s ease;
+	text-align: left;
+	font-size: 16px;
+	font-family: "Times New Roman", serif;
+	margin-left: 4%;
+	margin-top:2%;
+	margin-bottom: 2%;
+}
+.input-wrapper:focus-within span {
+	color: gray;
+}
+.input-wrapper {
+	position: relative;
+	display: block;
+	align-items: center;
+	width:25%;
+}
+.input{
+	border-radius: 20px;
+	padding-left: 5%;
+	padding-right: 5%;
+	padding-top: 4%;
+	padding-bottom: 4%;
+	border: 2px solid #ccc;
+	width:88%;
+}
+.input:focus {
+	outline: 2px solid rgb(205, 92, 92);
+	border: 2px solid #fff;
+}
+.input_date{
+	border-radius: 20px;
+	padding-left: 5%;
+	padding-right: 5%;
+	padding-top: 4%;
+	padding-bottom: 4%;
+	border: 2px solid #ccc;
+	width:88%;
+	color:gray;
+	font-size: 16px;
+    font-family: "Times New Roman", serif;
+	background-image: url("../image/dateOfBirth.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.input_date:focus {
+	outline: 2px solid rgb(205, 92, 92);
+	border: 2px solid #fff;
+}
+.submit_login{
+	margin-top:10%;
+	margin-bottom:5%;
+	width:100%;
+	border-radius: 20px;
+	padding: 3%;
+	font-size: 16px;
+	font-family: "Times New Roman", serif;
+	border: 2px solid #ccc;
+	text-align: center;
+}
+.href {
+	display: block;
+	font-size: 16px;
+	margin:3%;
+	width:100%;
+	margin:0 auto;
+	margin-top:3%;
+	margin-bottom:3%;
+}
+.formLogin {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	display: flex;
+	width:100%;
+}
+.select {
+width: 100%;
+}

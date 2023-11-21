@@ -1,0 +1,101 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0.5%;
+}
+header {
+  display: flex;
+  align-items: center;
+  background-color: rgba(240, 128, 128, 0.7);
+  border-radius: 20px;
+  padding: 0.2%;
+  background-size: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.logo {
+	margin-left: 3%;
+	text-align: left;
+	flex-grow: 0.9;
+	text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+	color: #fff;
+	text-decoration: none;
+}
+
+nav {
+	flex-grow: 0.1;
+	margin-left: 10%;
+}
+.btn {
+	border-radius: 5px;
+	text-align: center;
+	background: rgba(205, 92, 92,0.6);
+	color: #FFDAB9;
+	padding: 1.5%;
+	text-decoration: none;
+	box-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+	font-size: 18px;
+	font-family: "Times New Roman", serif;
+}
+.btn:hover {
+  background-color: rgba(178, 34, 34,0.6);
+  box-shadow:none;
+}
+.main{
+	background-color: rgba(240, 128, 128, 0.7);
+    border-radius: 20px;
+    text-align: center;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    padding-top:1%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width:100%;
+}
+table {
+	width: 100%;
+    padding: 2%;
+}
+
+td {
+	 width: calc(100%/7);
+	 padding: 0.5%;
+	 text-align: center;
+}
+.data{
+  width:70%;
+  display: inline-block;
+  padding-bottom:5%;
+  padding-top:5%;
+  text-align: center;
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-decoration: none;
+  color: #333;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+.data:hover {
+  background-color: #e0e0e0;
+}
+.year_month_line{
+	display: flex;
+    align-items: center;
+    width:100%;
+}
+p{
+	margin:0.5%;
+}
+.year_month{
+	padding:1%;
+	display: inline-block;
+	width:100%;
+	border-radius: 15px;
+	text-align: center;
+	background-color: rgba(220, 20, 60, 0.7);
+	box-shadow: 2px 2px 4px rgba(0,0,0,0.5)
+}
+
+

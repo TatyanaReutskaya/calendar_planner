@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/formLogin.css">
+    <title>Message</title>
+</head>
+<body>
+<div th:insert="~{headerUnauthorized :: header}"></div>
+<div class="main">
+<h2 th:text = "${message}">Text</h2>
+</div>
+</body>
+</html>

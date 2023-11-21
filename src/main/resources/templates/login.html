@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/formLogin.css">
+    <style>
+    header {
+    background-image: url([[${headerPNG}]]);
+    }
+  </style>
+</head>
+<body>
+<div th:insert="~{headerUnauthorized :: header}"></div>
+    <div class="main">
+        <form name="f" method="POST" action="/login" class="formLogin">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+            <div th:if="${param.error}" style="color:red">
+                Неправильные email или пароль
+            </div>
+            <div class="input-wrapper">
+                <span>Email</span>
+                <input type="text" name="username" id="username" class="input" placeholder="Email" />
+            </div>
+            <div class="input-wrapper">
+                <span>Пароль</span>
+                <input type="password" name="password" id="password" class="input" placeholder="Пароль" />
+            </div>
+            <div class="input-wrapper">
+                <input type="submit" value="Войти" class="submit_login"/>
+            </div>
+        </form>
+        <div class="input-wrapper">
+            <a th:href="@{/restorePassword}" class = "href">Забыли пароль?</a>
+        </div>
+        <div class="input-wrapper">
+            <a th:href="@{/registration}" class = "href">Регистрация</a>
+        </div>
+    </div>
+</body>
+</html>

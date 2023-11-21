@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/left_right_btn.css">
+    <link rel="stylesheet" href="style/menu.css">
+    <link rel="stylesheet" href="style/settings.css">
+    <title>Settings</title>
+</head>
+<body>
+<div th:insert="~{headerAuthorized :: header}"></div>
+<div class="main">
+    <div class="info">
+        <div class="info-wrapper">
+            <span class="info_span">Имя: </span>
+            <span th:text="${person.username}" class="about_span"/>
+        </div>
+
+        <div class="info-wrapper">
+            <span class="info_span">Email: </span>
+            <span th:text="${person.email}" class="about_span"/>
+        </div>
+
+        <div class="info-wrapper">
+            <span class="info_span">Дата рождения: </span>
+            <span th:text="${#temporals.format(person.dateOfBirth, 'dd.MM.yyyy')}" class="about_span"/>
+        </div>
+        <div style="color:red" th:if="${changeEmail!=null}" th:text="${changeEmail}">Change email</div>
+        <div class="info-wrapper">
+            <a th:href="@{/edit}" class="edit_btn">Редактировать</a>
+        </div>
+    </div>
+
+    <div class="info">
+        <div class="info-wrapper">
+            <a th:href="@{/editPassword}" class="edit_btn">Изменить пароль</a>
+        </div>
+    </div>
+
+</div>
+</div>
+
+</body>
+</html>

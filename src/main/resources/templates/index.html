@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style/style.css">
+  <link rel="stylesheet" href="style/left_right_btn.css">
+  <link rel="stylesheet" href="style/menu.css">
+  <title>Your Calendar</title>
+</head>
+<body>
+<div th:if="${authUsername==null}" th:insert="~{headerUnauthorized :: header}"></div>
+<div th:if="${authUsername!=null}" th:insert="~{headerAuthorized :: header}"></div>
+<div class="main" >
+  <div class = "year_month_line">
+    <a th:href="@{/yearDown}" class="left_btn"> << </a>
+    <p class ="year_month" th:text="${calendar.getYear()}">Year</p>
+    <a th:href="@{/yearUp}" class="right_btn"> >> </a>
+  </div>
+  <div class = "year_month_line">
+    <a th:href="@{/monthDown}" class="left_btn"> < </a>
+    <p class ="year_month" th:text="${calendar.getMonthString()}">Month</p>
+    <a th:href="@{/monthUp}" class="right_btn"> > </a>
+  </div>
+  <table th:with="dateArray=${calendar.setupDaysInMonth()}">
+    <tr>
+      <th>Понедельник</th>
+      <th>Вторник</th>
+      <th>Среда</th>
+      <th>Четверг</th>
+      <th>Пятница</th>
+      <th><font color="red">Суббота</font></th>
+      <th><font color="red">Воскресенье</font></th>
+    </tr>
+    <tr th:each="date, indexTr : ${dateArray}" th:if="${indexTr.index % 7 == 0}">
+      <td th:each="date2, indexTd : ${dateArray}" th:if="${indexTd.index>=indexTr.index} and ${indexTd.index<indexTr.index+7}" >
+        <a th:text="${date2}" th:if="${indexTd.index < 7 && date2 > 7}" th:style="'background-color: grey'" th:href="@{/monthDown}" class="data">1</a>
+        <a th:text="${date2}" th:if="${indexTd.index > 27 && date2 < 15}" th:style="'background-color: grey'" th:href="@{/monthUp}" class="data">1</a>
+        <a th:text="${date2}" th:if="${!(indexTd.index > 27 && date2 < 15)
+                                        &&!(indexTd.index < 7 && date2 > 7)}"
+           th:style="${actionInMonth.contains(date2) ? 'background-color: green;' : ''}+${calendar.isNow(date2)?'border: 3px solid red;' : ''}"
+           th:href="@{/days/{day}(day=${date2})}" class="data">1</a>
+      </td>
+    </tr>
+  </table>
+</div>
+</body>
+</html>
