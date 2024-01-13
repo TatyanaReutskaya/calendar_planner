@@ -61,7 +61,7 @@ public class PersonController {
         return "login";
     }
     @GetMapping("/registration")
-    public String registration(@ModelAttribute("personForm") Person person) {
+    public String registration(@ModelAttribute("person") Person person) {
         return "registration";
     }
     @PostMapping("/registration")

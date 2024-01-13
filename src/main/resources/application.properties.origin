@@ -1,19 +1,19 @@
 #Data source
-spring.datasource.driverClassName=
-spring.datasource.url=
-spring.datasource.username=
-spring.datasource.password=
+spring.datasource.driverClassName=com.mysql.cj.jdbc.Driver
+spring.datasource.url=jdbc:mysql://localhost:3306/calendar?createDatabaseIfNotExist=true
+spring.datasource.username=user
+spring.datasource.password=123
 
 #Hibernate properties
-spring.jpa.properties.hibernate.dialect=
-
-#hibernate.hbm2ddl.auto=create
-spring.jpa.properties.hibernate.hbm2ddl.auto=update
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+spring.jpa.properties.hibernate.current_session_context_class=thread
+#spring.jpa.properties.hibernate.hbm2ddl.auto=update
+spring.jpa.properties.hibernate.hbm2ddl.auto=create
 
 #Mail properties
-spring.mail.host=
-spring.mail.port=
-spring.mail.username=
-spring.mail.password=
-spring.mail.properties.mail.smtp.auth=
-spring.mail.properties.mail.smtp.starttls.enable=
+spring.mail.host=smtp.gmail.com
+spring.mail.port=587
+spring.mail.username=tvr.your.calendar@gmail.com
+spring.mail.password= cmwe bzqx pmzb attc
+spring.mail.properties.mail.smtp.auth=true
+spring.mail.properties.mail.smtp.starttls.enable=true

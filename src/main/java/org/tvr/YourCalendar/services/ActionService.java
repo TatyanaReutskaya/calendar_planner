@@ -103,7 +103,7 @@ public class ActionService {
         Set<Integer> actionInMonthRepeat = new HashSet<>();
         Set<Integer> actionInMonth = person.getItems().stream().filter(action -> {
             if (action.getRepeat()==null) {
-                return action.getDate().getMonthValue()== calendar.getMonth()+1;
+                return (action.getDate().getMonthValue()== calendar.getMonth()+1)&&(action.getDate().getYear()== calendar.getYear());
             }
             else {
                 return checkRepeatForMonth(action,calendar.toLocalDate(),actionInMonthRepeat);
@@ -163,7 +163,7 @@ public class ActionService {
         }
     }
     @Transactional
-    public void done(int id,LocalDate exludeDate,Authentication authentication) {
+    public void done(int id,LocalDate exludeDate) {
         Action action = actionRepository.findById(id).orElse(null);
         if (action!=null) {
             Person person = peopleRepository.findById(action.getOwner().getId()).orElse(null);
@@ -275,6 +275,23 @@ public class ActionService {
         });
         sessionService.forChangeAllSession(new PersonDetails(person));
         });
+    }
+    @Transactional
+    public void editOneAction(Action action, Action forChange, Person person, LocalDate now) {
+        if (forChange.getRepeat()==null) {
+            action.setOwner(person);
+            actionRepository.save(action);
+            person.getItems().removeIf(act ->act.getId()==forChange.getId());
+            person.getItems().add(action);
+        }
+        else {
+            done(forChange.getId(),now);
+            action.setOwner(person);
+            action.setId(null);
+            actionRepository.save(action);
+            person.getItems().add(action);
+        }
+        sessionService.forChangeAllSession(new PersonDetails(person));
     }
 }
 

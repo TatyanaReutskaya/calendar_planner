@@ -91,8 +91,8 @@ public class ActionController {
         return "actionInfo";
     }
     @PostMapping("/infoAction/{id}")
-    public String done(@PathVariable int id,Authentication authentication){
-        actionService.done(id,calendar.toLocalDate(),authentication);
+    public String done(@PathVariable int id){
+        actionService.done(id,calendar.toLocalDate());
         return "redirect:/days/"+calendar.getDay();
     }
     @PostMapping("/deleteAction/{id}")
@@ -125,10 +125,7 @@ public class ActionController {
             return "editAction";
         }
         if (request.getParameter("saveOne")!=null) {
-            actionService.done(forChange.getId(),calendar.toLocalDate(),authentication);
-            action.setOwner(personService.getAuthPerson(authentication));
-            action.setId(null);
-            actionService.save(action,person);
+            actionService.editOneAction(action,forChange,person, calendar.toLocalDate());
         }
         if (request.getParameter("saveAll")!=null) {
             actionService.editAllAction(action,forChange,person);
