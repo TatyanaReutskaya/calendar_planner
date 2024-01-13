@@ -24,8 +24,5 @@ Thymeleaf, HTML, CSS
 
 ### Запуск приложения
 Для запуска проекта нужно скопировать проект на локальную машину.
-Переиминовать файл application.properties.origin в application.properties
-В cmd перейти в папку с проектом
-Выполнить команду docker-compose up
-Далее на http://localhost:8080 будет доступно приложение 
+Переиминовать файл application.properties.origin в application.properties  В cmd перейти в папку с проектом  Выполнить команду docker-compose up  Далее на http://localhost:8080 будет доступно приложение 
 
